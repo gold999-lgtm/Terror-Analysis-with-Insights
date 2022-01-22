@@ -2,3 +2,4 @@ dash
 pandas
 dash_html_components
 dash_core_components
+gunicorn
