@@ -7,7 +7,7 @@ from dash import dcc
 import plotly.graph_objects as go
 import plotly.express as px
 from dash.exceptions import PreventUpdate
-
+import flask
 #This is the place to create global variable
 #app is global variable of Dash type
 app=dash.Dash()
