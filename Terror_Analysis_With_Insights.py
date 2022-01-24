@@ -10,7 +10,7 @@ from dash.exceptions import PreventUpdate
 import flask
 #This is the place to create global variable
 #app is global variable of Dash type
-app=dash.Dash()
+app=dash.Dash(__name__,suppress_callback_exceptions=True)
 server=app.server
 #defining a function load_data
 def load_data():
