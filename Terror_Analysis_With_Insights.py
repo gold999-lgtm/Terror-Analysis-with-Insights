@@ -401,6 +401,7 @@ def main():
     global app
     
     app.layout=create_app_ui()
+    server.layout=app.layout
     app.title="Terrorism Analysis with Insights"
     #assets/favicon.icon
     #https://www.favicon.cc/
