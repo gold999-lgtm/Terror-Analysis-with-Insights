@@ -7,11 +7,10 @@ from dash import dcc
 import plotly.graph_objects as go
 import plotly.express as px
 from dash.exceptions import PreventUpdate
-import flask
 #This is the place to create global variable
 #app is global variable of Dash type
 app=dash.Dash(__name__,suppress_callback_exceptions=True)
-
+server=app.sever
 #defining a function load_data
 def load_data():
     dataset_name="global_terror.csv"
@@ -72,7 +71,7 @@ def open_browser():
     #opens a default browser within a tab
     webbrowser.open_new("http://127.0.0.1:8050/")
 def create_app_ui():
-    app.layout=html.Div(
+    main_layout=html.Div(
         [
          html.H1("Terrorism Analysis with Insights",id="Main_title"),
          dcc.Tabs(id="Tabs",value="Map",children=[
@@ -149,7 +148,7 @@ def create_app_ui():
 
 
              html.Div(id="graph-object",children="Graph will be shown here")])
-    return app.layout
+    return main_layout
 
 
 @app.callback(
@@ -396,7 +395,7 @@ def main():
     #UI interact(action)
     #layout
     #callback
-    
+    global app
     app.layout=create_app_ui()
     app.title="Terrorism Analysis with Insights"
     #assets/favicon.icon
