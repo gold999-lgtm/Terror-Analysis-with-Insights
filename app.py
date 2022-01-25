@@ -12,66 +12,53 @@ from dash.exceptions import PreventUpdate
 app=dash.Dash(__name__,suppress_callback_exceptions=True)
 server=app.server
 #defining a function load_data
-def load_data():
-    dataset_name="global_terror.csv"
-    #this line is used to hide warnings given by pandas
-    #df is a locale variable
-    global df
-    df=pd.read_csv(dataset_name)
-    global month_list
-    month={
-        "January":1,
-        "February":2,
-        "March":3,
-        "April":4,
-        "May":5,
-        "June":6,
-        "July":7,
-        "August":8,
-        "September":9,
-        "October":10,
-        "November":11,
-        "December":12
-        }
-   
-    
-    month_list=[{"label":key,"value":values} for key,values in month.items()]
-    global date_list
-    date_list=[x for x in range(1,32)]
-    global region_list
-    region_list=[{"label":str(i),"value":str(i)}for i in sorted(df["region_txt"].unique().tolist())]
-    global country_list
-    country_list=df.groupby("region_txt")["country_txt"].unique().apply(list).to_dict()
-    
-    
-    global state_list
-    state_list=df.groupby("country_txt")["provstate"].unique().apply(list).to_dict()
-    
-    
-    global city_list
-    city_list=df.groupby("provstate")["city"].unique().apply(list).to_dict()
-    
-    
-    
-    global attack_type_list
-    attack_type_list=[{"label":str(i),"value":str(i)}for i in df["attacktype1_txt"].unique().tolist()] 
-    
-    
-    global year_list
-    year_list=sorted(df["iyear"].unique().tolist())
-    global year_dict
-    year_dict={str(year):str(year) for year in year_list}
-    #chart dropdown options
-    global chart_dropdown_values
-    chart_dropdown_values={"Terrorist Organisation":"gname","Target Nationality":"natlty1_txt","Target Type":"targtype1_txt","Type of Attack":"attacktype1_txt","Weapon Type":"weaptype1_txt","Region":"region_txt","Country Attacked":"country_txt"}
-    chart_dropdown_values=[{"label":keys,"value":value}for keys,value in chart_dropdown_values.items()]
-    
+dataset_name="global_terror.csv"
+        #this line is used to hide warnings given by pandas
+        #df is a locale variable
+
+df=pd.read_csv(dataset_name)
+
+month={
+            "January":1,
+            "February":2,
+            "March":3,
+            "April":4,
+            "May":5,
+            "June":6,
+            "July":7,
+            "August":8,
+            "September":9,
+            "October":10,
+            "November":11,
+            "December":12
+            }
+month_list=[{"label":key,"value":values} for key,values in month.items()]
+
+date_list=[x for x in range(1,32)]
+region_list=[{"label":str(i),"value":str(i)}for i in sorted(df["region_txt"].unique().tolist())]
+country_list=df.groupby("region_txt")["country_txt"].unique().apply(list).to_dict()
+
+state_list=df.groupby("country_txt")["provstate"].unique().apply(list).to_dict()
+
+
+
+city_list=df.groupby("provstate")["city"].unique().apply(list).to_dict()
+
+
+
+attack_type_list=[{"label":str(i),"value":str(i)}for i in df["attacktype1_txt"].unique().tolist()] 
+
+year_list=sorted(df["iyear"].unique().tolist())
+year_dict={str(year):str(year) for year in year_list}
+        #chart dropdown options
+chart_dropdown_values={"Terrorist Organisation":"gname","Target Nationality":"natlty1_txt","Target Type":"targtype1_txt","Type of Attack":"attacktype1_txt","Weapon Type":"weaptype1_txt","Region":"region_txt","Country Attacked":"country_txt"}
+chart_dropdown_values=[{"label":keys,"value":value}for keys,value in chart_dropdown_values.items()]
+
     
 def open_browser():
     #opens a default browser within a tab
     webbrowser.open_new("http://127.0.0.1:8050/")
-def create_app_ui():
-    main_layout=html.Div(
+app.layout=html.Div(
         [
          html.H1("Terrorism Analysis with Insights",id="Main_title"),
          dcc.Tabs(id="Tabs",value="Map",children=[
@@ -148,7 +135,7 @@ def create_app_ui():
 
 
              html.Div(id="graph-object",children="Graph will be shown here")])
-    return main_layout
+ 
 
 
 @app.callback(
@@ -389,14 +376,13 @@ def set_city_options(state_value):
 def main():
     print("Starting the main function...")
     #Calling of Your function load_data
-    load_data()
+    
     open_browser()
     #print(df.sample(5))
     #UI interact(action)
     #layout
     #callback
-    global app
-    app.layout=create_app_ui()
+    
     app.title="Terrorism Analysis with Insights"
     #assets/favicon.icon
     #https://www.favicon.cc/
