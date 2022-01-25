@@ -405,8 +405,7 @@ def main():
     #assets/favicon.icon
     #https://www.favicon.cc/
     app.run_server()
-    df=None
-    app=None    
+      
     print("Ending the main function...")
 
 if __name__=="__main__":
