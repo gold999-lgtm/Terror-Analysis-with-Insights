@@ -72,8 +72,7 @@ def open_browser():
     #opens a default browser within a tab
     webbrowser.open_new("http://127.0.0.1:8050/")
 
-def create_app_ui():
-    main_layout=html.Div(
+app.layout=html.Div(
     [
      html.H1("Terrorism Analysis with Insights",id="Main_title"),
      dcc.Tabs(id="Tabs",value="Map",children=[
@@ -149,9 +148,8 @@ def create_app_ui():
                 
                  
      
-         html.Div(id="graph-object",children="Graph will be shown here")
-         ])
-    return main_layout
+         html.Div(id="graph-object",children="Graph will be shown here")])
+   
 
 
 @app.callback(
@@ -398,9 +396,7 @@ def main():
     #UI interact(action)
     #layout
     #callback
-    global app
     
-    app.layout=create_app_ui()
     
     app.title="Terrorism Analysis with Insights"
     #assets/favicon.icon
