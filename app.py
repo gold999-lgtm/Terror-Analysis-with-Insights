@@ -71,85 +71,85 @@ def load_data():
 def open_browser():
     #opens a default browser within a tab
     webbrowser.open_new("http://127.0.0.1:8050/")
+def create_app_ui():
+    app.layout=html.Div(
+        [
+         html.H1("Terrorism Analysis with Insights",id="Main_title"),
+         dcc.Tabs(id="Tabs",value="Map",children=[
+             dcc.Tab(label="Map tool",id="Map tool",value="Map",children=[
+                 dcc.Tabs(id="subtabs",value="WorldMap",children=[
+                          dcc.Tab(label="World Map tool",id="World",value="WorldMap"),
+                          dcc.Tab(label="India Map tool",id="India",value="IndiaMap")
+                          ]),
+                 dcc.Dropdown(id="month",
+                          options=month_list,
+                          placeholder="Select Month",
+                          multi=True),
+                          dcc.Dropdown(id="date",
+                          placeholder="Select Day",
+                          multi=True),
+                          dcc.Dropdown(id="region-dropdown",
+                          options=region_list,
+                          placeholder="Select Region",
+                          multi=True),
+                          dcc.Dropdown(id="country-dropdown",
+                          options=[{"label":"All","value":"All"}],
+                          placeholder="Select Country",
+                          multi=True),
+                          dcc.Dropdown(id="state-dropdown",options=[{"label":"All","value":"All"}],
+                          placeholder="Select State",
+                          multi=True),
+                          dcc.Dropdown(id="city-dropdown",options=[{"label":"All","value":"All"}],
+                          placeholder="Select City",
+                          multi=True),
+                          dcc.Dropdown(id="attacktype-dropdown",
+                          options=attack_type_list,
+                          placeholder="Select Attack Type",
+                          multi=True),
 
-app.layout=html.Div(
-    [
-     html.H1("Terrorism Analysis with Insights",id="Main_title"),
-     dcc.Tabs(id="Tabs",value="Map",children=[
-         dcc.Tab(label="Map tool",id="Map tool",value="Map",children=[
-             dcc.Tabs(id="subtabs",value="WorldMap",children=[
-                      dcc.Tab(label="World Map tool",id="World",value="WorldMap"),
-                      dcc.Tab(label="India Map tool",id="India",value="IndiaMap")
-                      ]),
-             dcc.Dropdown(id="month",
-                      options=month_list,
-                      placeholder="Select Month",
-                      multi=True),
-                      dcc.Dropdown(id="date",
-                      placeholder="Select Day",
-                      multi=True),
-                      dcc.Dropdown(id="region-dropdown",
-                      options=region_list,
-                      placeholder="Select Region",
-                      multi=True),
-                      dcc.Dropdown(id="country-dropdown",
-                      options=[{"label":"All","value":"All"}],
-                      placeholder="Select Country",
-                      multi=True),
-                      dcc.Dropdown(id="state-dropdown",options=[{"label":"All","value":"All"}],
-                      placeholder="Select State",
-                      multi=True),
-                      dcc.Dropdown(id="city-dropdown",options=[{"label":"All","value":"All"}],
-                      placeholder="Select City",
-                      multi=True),
-                      dcc.Dropdown(id="attacktype-dropdown",
-                      options=attack_type_list,
-                      placeholder="Select Attack Type",
-                      multi=True),
-     
-                     html.H5("Select the Year",id="year_title"),
-                     dcc.RangeSlider(
-                     id="year-slider",
-                     min=min(year_list),
-                     max=max(year_list),
-                     value=[min(year_list),max(year_list)],
-                     marks=year_dict,
-                     step=None),
-                     html.Br()
-             
-                 
-                 ]),
-         dcc.Tab(label="Chart Tool",id="chart tool",value="Chart",children=[
-             dcc.Tabs(id="subtabs2",value="WorldChart",children=[
-                 dcc.Tab(label="World Chart tool",id="WorldC",value="WorldChart"),
-                 dcc.Tab(label="India Chart tool",id="IndiaC",value="IndiaChart")]),
-                     dcc.Dropdown(id="Chart_Dropdown",options=chart_dropdown_values,placeholder="Select option",value="region_txt"),
-                     html.Br(),
-                     html.Br(),
-                     html.Hr(),
-                     dcc.Input(id="search",placeholder="Search Filter"),
-                     html.Hr(),
-                     html.Br(),
-                    dcc.RangeSlider(
-                     id="cyear_slider",
-                     min=min(year_list),
-                     max=max(year_list),
-                     value=[min(year_list),max(year_list)],
-                     marks=year_dict,
-                     step=None),
-                     html.Br()
-             
-                 
-                 ]),
-                
-         
-                ]),
-                     
-                
-                 
-     
-         html.Div(id="graph-object",children="Graph will be shown here")])
-   
+                         html.H5("Select the Year",id="year_title"),
+                         dcc.RangeSlider(
+                         id="year-slider",
+                         min=min(year_list),
+                         max=max(year_list),
+                         value=[min(year_list),max(year_list)],
+                         marks=year_dict,
+                         step=None),
+                         html.Br()
+
+
+                     ]),
+             dcc.Tab(label="Chart Tool",id="chart tool",value="Chart",children=[
+                 dcc.Tabs(id="subtabs2",value="WorldChart",children=[
+                     dcc.Tab(label="World Chart tool",id="WorldC",value="WorldChart"),
+                     dcc.Tab(label="India Chart tool",id="IndiaC",value="IndiaChart")]),
+                         dcc.Dropdown(id="Chart_Dropdown",options=chart_dropdown_values,placeholder="Select option",value="region_txt"),
+                         html.Br(),
+                         html.Br(),
+                         html.Hr(),
+                         dcc.Input(id="search",placeholder="Search Filter"),
+                         html.Hr(),
+                         html.Br(),
+                        dcc.RangeSlider(
+                         id="cyear_slider",
+                         min=min(year_list),
+                         max=max(year_list),
+                         value=[min(year_list),max(year_list)],
+                         marks=year_dict,
+                         step=None),
+                         html.Br()
+
+
+                     ]),
+
+
+                    ]),
+
+
+
+
+             html.Div(id="graph-object",children="Graph will be shown here")])
+    return app.layout
 
 
 @app.callback(
@@ -397,7 +397,7 @@ def main():
     #layout
     #callback
     
-    
+    app.layout=create_app_ui()
     app.title="Terrorism Analysis with Insights"
     #assets/favicon.icon
     #https://www.favicon.cc/
