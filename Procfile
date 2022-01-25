@@ -1,1 +1,1 @@
-web: gunicorn Terror_Analysis_With_Insights:server
+web: gunicorn app:server
