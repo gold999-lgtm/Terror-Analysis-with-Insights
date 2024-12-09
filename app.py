@@ -388,7 +388,7 @@ def main():
     app.title="Terrorism Analysis with Insights"
     #assets/favicon.icon
     #https://www.favicon.cc/
-    app.run_server()
+   
       
     print("Ending the main function...")
 
