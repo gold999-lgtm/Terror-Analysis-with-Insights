@@ -10,6 +10,7 @@ from dash.exceptions import PreventUpdate
 #This is the place to create global variable
 #app is global variable of Dash type
 app=dash.Dash(__name__,suppress_callback_exceptions=True)
+logging.basicConfig(level=logging.DEBUG)
 server=app.server
 #defining a function load_data
 dataset_name="global_terror.csv"
