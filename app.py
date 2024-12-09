@@ -35,7 +35,9 @@ month={
 month_list=[{"label":key,"value":values} for key,values in month.items()]
 
 date_list=[x for x in range(1,32)]
-region_list=[{"label":str(i),"value":str(i)}for i in sorted(df["region_txt"].unique().tolist())]
+df["region_txt"] = df["region_txt"].fillna("Unknown").astype(str)
+region_list = [{"label": str(i), "value": str(i)} for i in sorted(df["region_txt"].unique().tolist())]
+
 country_list=df.groupby("region_txt")["country_txt"].unique().apply(list).to_dict()
 
 state_list=df.groupby("country_txt")["provstate"].unique().apply(list).to_dict()
